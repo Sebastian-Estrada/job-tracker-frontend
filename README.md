@@ -23,11 +23,11 @@ To get started with the frontend, follow these steps:
 
 1. Clone the repository:
   ```bash
-  git clone https://github.com/yourusername/job_tracker_frontend.git
+  git clone https://github.com/Sebastian-Estrada/job-tracker-frontend.git
   ```
 2. Navigate to the project directory:
   ```bash
-  cd job_tracker_frontend
+  cd job-tracker-frontend
   ```
 3. Install the dependencies:
   ```bash
@@ -48,11 +48,3 @@ This will launch the application in your default web browser. The development se
 - Add, edit, and delete job entries
 - Filter and search job listings
 - Responsive design
-
-## Contributing
-
-We welcome contributions! Please read our [contributing guidelines](CONTRIBUTING.md) for more details.
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.

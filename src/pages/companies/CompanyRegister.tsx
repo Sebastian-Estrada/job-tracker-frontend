@@ -13,16 +13,18 @@ const CompanyRegister: React.FC = () => {
     setLoading(true);
     setError('');
     setSuccess('');
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
-    try {
-      const response = await fetch('http://localhost:8000/applications/companies/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Token ${localStorage.getItem('token')}`,
-        },
-        body: JSON.stringify({ name }),
-      });
+  console.log(backendUrl)
+  try {
+    const response = await fetch(`${backendUrl}/applications/companies/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Token ${localStorage.getItem('token')}`,
+      },
+      body: JSON.stringify({ name }),
+    });
 
       if (!response.ok) {
         const errorData = await response.json();

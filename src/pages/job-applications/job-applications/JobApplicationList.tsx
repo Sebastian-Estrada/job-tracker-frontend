@@ -12,11 +12,12 @@ const JobApplicationList: React.FC = () => {
   const [applications, setApplications] = useState<JobApplication[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
     const fetchApplications = async () => {
       try {
-        const response = await fetch('http://localhost:8000/applications/job-applications/', {
+        const response = await fetch(`${backendUrl}/applications/job-applications/`, {
           headers: {
             'Authorization': `Token ${localStorage.getItem('token')}`,
           },

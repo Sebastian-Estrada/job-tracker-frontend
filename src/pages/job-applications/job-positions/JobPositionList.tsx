@@ -11,11 +11,12 @@ const JobPositionList: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const navigate = useNavigate(); // Usamos navigate para redirigir
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
     const fetchJobPositions = async () => {
       try {
-        const response = await fetch('http://localhost:8000/applications/job-positions/', {
+        const response = await fetch(`${backendUrl}/applications/job-positions/`, {
           headers: {
             'Authorization': `Token ${localStorage.getItem('token')}`,
           },

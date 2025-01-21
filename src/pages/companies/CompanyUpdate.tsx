@@ -7,10 +7,12 @@ const CompanyUpdate: React.FC = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   useEffect(() => {
     const fetchCompany = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/applications/companies/${id}/`, {
+        const response = await fetch(`${backendUrl}/applications/companies/${id}/`, {
           method: 'GET',
           headers: {
             'Authorization': `Token ${localStorage.getItem('token')}`,

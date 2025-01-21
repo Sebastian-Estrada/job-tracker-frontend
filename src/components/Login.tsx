@@ -9,11 +9,12 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
-      const response = await fetch('http://localhost:8000/users/login/', {
+      const response = await fetch(`${backendUrl}/users/login/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

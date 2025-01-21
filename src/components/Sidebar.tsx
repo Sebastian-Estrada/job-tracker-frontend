@@ -6,10 +6,11 @@ const Sidebar: React.FC<{ onLogout: () => void }> = ({ onLogout }) => {
   const [isUsersOpen, setIsUsersOpen] = useState(false);
   const [isApplicationOpen, setIsApplicationOpen] = useState(false);
   const navigate = useNavigate();
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   const handleLogout = async () => {
     try {
-      await fetch('http://localhost:8000/logout/', {
+      await fetch(`${backendUrl}/logout/`, {
         method: 'POST',
         headers: {
           'Authorization': `Token ${localStorage.getItem('token')}`, // Send the current token for validation

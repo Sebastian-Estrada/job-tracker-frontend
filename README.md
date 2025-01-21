@@ -29,7 +29,11 @@ To get started with the frontend, follow these steps:
   ```bash
   cd job-tracker-frontend
   ```
-3. Install the dependencies:
+  3. Create a `.env` file in the root directory and add the following line:
+    ```bash
+    VITE_BACKEND_URL=http://localhost:8000
+    ```
+4. Install the dependencies:
   ```bash
   npm install
   ```

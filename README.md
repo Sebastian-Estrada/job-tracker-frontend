@@ -30,7 +30,7 @@ To get started with the frontend, follow these steps:
   ```
   3. Create a `.env` file in the root directory and add the following line:
     ```bash
-    VITE_BACKEND_URL=http://localhost:8000
+    VITE_BACKEND_URL=http://localhost:8080
     ```
 4. Install the dependencies:
   ```bash

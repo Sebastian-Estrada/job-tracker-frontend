@@ -94,3 +94,9 @@ This will start both the backend and frontend services and make the application 
 - Add, edit, and delete job entries
 - Filter and search job listings
 - Responsive design
+
+
+docker build -t frontend .
+docker tag frontend:latest 732978450718.dkr.ecr.ca-central-1.amazonaws.com/frontend:latest
+aws ecr get-login-password --region ca-central-1 --profile personal-account | docker login --username AWS --password-stdin 732978450718.dkr.ecr.ca-central-1.amazonaws.com
+docker push 732978450718.dkr.ecr.ca-central-1.amazonaws.com/frontend:latest

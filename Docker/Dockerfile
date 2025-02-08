@@ -14,20 +14,20 @@ COPY . .
 # Build the Vite app for production
 RUN npm run build
 
-# Production Stage: Use Nginx to serve static files
-FROM nginx:1.25-alpine AS production
+# # Production Stage: Use Nginx to serve static files
+# FROM nginx:1.25-alpine AS production
 
-# Copy built Vite app from build stage
-COPY --from=build /app/dist /usr/share/nginx/html
+# # Copy built Vite app from build stage
+# COPY --from=build /app/dist /usr/share/nginx/html
 
-# Copy custom Nginx config
-COPY nginx/default.conf /etc/nginx/conf.d/default.conf
+# # Copy custom Nginx config
+# COPY nginx/default.conf /etc/nginx/conf.d/default.conf
 
-# Expose port 80
-EXPOSE 80
+# # Expose port 80
+# EXPOSE 80
 
-# Start Nginx
-CMD ["nginx", "-g", "daemon off;"]
+# # Start Nginx
+# CMD ["nginx", "-g", "daemon off;"]
 
 # Development Stage: Use Vite dev server
 FROM node:18-alpine AS development

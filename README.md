@@ -96,7 +96,31 @@ This will start both the backend and frontend services and make the application 
 - Responsive design
 
 
-docker build -f Docker/Dockerfile -t frontend .
-docker tag frontend:latest 732978450718.dkr.ecr.ca-central-1.amazonaws.com/frontend:latest
+This section provides instructions for building, tagging, and pushing the Docker image for the frontend application to Amazon ECR (Elastic Container Registry).
+## Building and Pushing Docker Image to Amazon ECR
+
+To build, tag, and push the Docker image for the frontend application to Amazon ECR, follow these steps:
+
+1. Build the Docker image using the specified Dockerfile located in the Docker directory and tag it as 'frontend':
+  ```bash
+  docker build -f Docker/Dockerfile -t frontend .
+  ```
+
+2. Tag the Docker image with the ECR repository URI:
+  ```bash
+  docker tag frontend:latest 732978450718.dkr.ecr.ca-central-1.amazonaws.com/frontend:latest
+  ```
+
+3. Authenticate Docker to the Amazon ECR registry using AWS CLI with the specified region and profile:
+  ```bash
+  aws ecr get-login-password --region ca-central-1 --profile personal-account | docker login --username AWS --password-stdin 732978450718.dkr.ecr.ca-central-1.amazonaws.com
+  ```
+
+4. Push the tagged Docker image to the specified ECR repository:
+  ```bash
+  docker push 732978450718.dkr.ecr.ca-central-1.amazonaws.com/frontend:latest
+  ```
+
+<!-- docker tag frontend:latest 732978450718.dkr.ecr.ca-central-1.amazonaws.com/frontend:latest
 aws ecr get-login-password --region ca-central-1 --profile personal-account | docker login --username AWS --password-stdin 732978450718.dkr.ecr.ca-central-1.amazonaws.com
-docker push 732978450718.dkr.ecr.ca-central-1.amazonaws.com/frontend:latest
+docker push 732978450718.dkr.ecr.ca-central-1.amazonaws.com/frontend:latest -->

@@ -6,7 +6,7 @@ WORKDIR /app
 
 # Install dependencies
 COPY package*.json ./
-RUN npm install --silent
+RUN npm install
 
 # Copy source files
 COPY . .
@@ -24,7 +24,7 @@ COPY --from=build /app/dist /usr/share/nginx/html
 COPY nginx/default.conf /etc/nginx/conf.d/default.conf
 
 # Expose port 80
-EXPOSE 80
+EXPOSE 8080
 
 # Start Nginx
 CMD ["nginx", "-g", "daemon off;"]
@@ -36,7 +36,7 @@ WORKDIR /app
 
 # Install dependencies
 COPY package*.json ./
-RUN npm install --silent
+RUN npm install 
 
 # Copy source files
 COPY . .
@@ -45,4 +45,5 @@ COPY . .
 EXPOSE 5173
 
 # Start the Vite development server
-CMD ["npm", "run", "dev", "--", "--host"]
+#CMD ["npm", "run", "dev", "--", "--host"]
+#CMD ["npm", "run", "dev"]

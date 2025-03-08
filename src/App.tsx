@@ -4,7 +4,9 @@ import './App.css'; // Ensure you have imported Tailwind CSS in this file
 import Sidebar from './components/Sidebar';
 import Login from './components/Login';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-// import Dashboard from './pages/Dashboard'; // Example pages
+import Dashboard from './pages/dashboard/Dashboard';
+
+// Example pages
 // import Applications from './pages/Applications';
 
 import CompanyList from './pages/companies/CompanyList';
@@ -55,6 +57,7 @@ function App() {
               <Route path="/job-positions-update" element={<JobPositionUpdate />} />
           
               <Route path="/users/list" element={<UsersList />} />
+              <Route path= "/dashboard"element={<Dashboard />}  />
               </>
             ) : (
               <Route path="/" element={<Login onLogin={() => setIsLoggedIn(true)} />} />

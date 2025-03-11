@@ -30,7 +30,10 @@ const Dashboard = () => {
         setApplications(formattedData);
         setLoading(false);
       })
-      .catch((error) => console.error("Error fetching data:", error));
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+        setLoading(false);
+      });
   }, []);
 
   if (loading) return <p>Loading job applications...</p>;
@@ -56,12 +59,12 @@ const Dashboard = () => {
               <td className="py-2 px-4 border">{app.application_date}</td>
               <td className="py-2 px-4 border">{app.status}</td>
               <td className="py-2 px-4 border">
-                <a href={app.resume} className="text-blue-500" target="_blank">
+                <a href={app.resume} className="text-blue-500" target="_blank" rel="noopener noreferrer">
                   View
                 </a>
               </td>
               <td className="py-2 px-4 border">
-                <a href={app.cover_letter} className="text-blue-500" target="_blank">
+                <a href={app.cover_letter} className="text-blue-500" target="_blank" rel="noopener noreferrer">
                   View
                 </a>
               </td>

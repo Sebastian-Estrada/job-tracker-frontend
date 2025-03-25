@@ -10,7 +10,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
-
+  console.log(backendUrl);
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {

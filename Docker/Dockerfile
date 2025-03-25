@@ -8,6 +8,12 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install --silent
 
+# Declare the build argument
+ARG VITE_BACKEND_URL
+
+# Set the environment variable for use inside the container
+ENV VITE_BACKEND_URL=$VITE_BACKEND_URL
+
 # Copy source files
 COPY . .
 

@@ -49,5 +49,8 @@ jobs:
           helm upgrade --install $HELM_RELEASE_NAME $HELM_CHART_PATH --namespace default \
             --set image.repository=$DOCKER_IMAGE --set image.tag=latest
 
+      - name: Force Restart Deployment
+        run: kubectl rollout restart deployment/frontend -n default
+
       - name: Verify deployment
         run: kubectl get pods -n default

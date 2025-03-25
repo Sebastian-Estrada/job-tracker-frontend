@@ -1,0 +1,53 @@
+name: Deploy Frontend to EKS
+
+on:
+  push:
+    branches:
+      - master  # Change this if using a different branch
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      AWS_REGION: "ca-central-1"  # Change this to your AWS region
+      EKS_CLUSTER_NAME: "job-tracker-cluster"  # Replace with your EKS cluster name
+      DOCKER_IMAGE: "sebasnates/job-tracker-frontend"  # Replace with your Docker Hub repo
+      HELM_RELEASE_NAME: "frontend"
+      HELM_CHART_PATH: "./helm/helm-frontend"  # Adjust if your chart is in a different path
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        run: |
+          docker build -f Docker/Dockerfile -t $DOCKER_IMAGE:latest .
+          docker push $DOCKER_IMAGE:latest
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Update kubeconfig
+        run: aws eks update-kubeconfig --region $AWS_REGION --name $EKS_CLUSTER_NAME
+
+      - name: Deploy frontend with Helm
+        run: |
+          helm upgrade --install $HELM_RELEASE_NAME $HELM_CHART_PATH --namespace default \
+            --set image.repository=$DOCKER_IMAGE --set image.tag=latest
+
+      - name: Verify deployment
+        run: kubectl get pods -n default

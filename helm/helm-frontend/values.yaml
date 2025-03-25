@@ -25,5 +25,4 @@ autoscaling:
   minReplicas: 1
   maxReplicas: 5
   targetCPUUtilizationPercentage: 80
-                           # Container port inside the pod (where the backend listens)
-                                # Limit the CPU usage to 500 milli-CPU
+

@@ -43,7 +43,7 @@ jobs:
       - name: Set Environment Variables in Kubernetes
         run: |
           kubectl set env deployment/frontend \
-            VITE_BACKEND_URL=${{ vars.VITE_BACKEND_URL }} \
+            VITE_BACKEND_URL=${{ vars.VITE_BACKEND_URL }}
 
           kubectl rollout restart deployment/frontend -n $NAMESPACE
           kubectl rollout status deployment/frontend -n $NAMESPACE

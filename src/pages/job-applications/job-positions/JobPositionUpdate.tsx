@@ -12,11 +12,12 @@ const JobPositionUpdate: React.FC = () => {
   const [jobPosition, setJobPosition] = useState<JobPosition>({ id: 0, title: '' });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
     const fetchJobPosition = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/applications/job-positions/${id}/`, {
+        const response = await fetch(`${backendUrl}/applications/job-positions/${id}/`, {
           headers: {
             'Authorization': `Token ${localStorage.getItem('token')}`,
           },

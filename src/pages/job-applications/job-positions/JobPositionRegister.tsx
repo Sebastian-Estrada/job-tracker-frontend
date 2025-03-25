@@ -8,33 +8,35 @@ interface Company {
 
 interface JobPosition {
   title: string;
-  company: number; // Solo necesitamos el ID de la compañía
+  company: number;
   location?: string;
   date_posted: string;
   application_deadline?: string;
   description: string;
-  // keywords: string[];
+  keywords: string[];
 }
 
 const JobPositionRegister: React.FC = () => {
   const navigate = useNavigate();
   const [jobPosition, setJobPosition] = useState<JobPosition>({
     title: '',
-    company: 0,
+    company: 1,
     location: '',
     date_posted: '',
     application_deadline: '',
     description: '',
-    // keywords: []
+    keywords: []
   });
+
   const [companies, setCompanies] = useState<Company[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
     const fetchCompanies = async () => {
       try {
-        const response = await fetch('http://localhost:8000/applications/companies/', {
+        const response = await fetch(`${backendUrl}/applications/companies/`, {
           headers: {
             'Authorization': `Token ${localStorage.getItem('token')}`,
           },
@@ -56,9 +58,9 @@ const JobPositionRegister: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(JSON.stringify(jobPosition))
+
     try {
-      const response = await fetch('http://localhost:8000/applications/job-positions/', {
+      const response = await fetch(`${backendUrl}/applications/job-positions/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -66,7 +68,6 @@ const JobPositionRegister: React.FC = () => {
         },
         body: JSON.stringify(jobPosition),
       });
-      console.log(jobPosition)
 
       if (!response.ok) throw new Error('Failed to create job position');
 
@@ -168,7 +169,7 @@ const JobPositionRegister: React.FC = () => {
             required
           />
         </div>
-        {/* <div className="mb-4">
+        <div className="mb-4">
           <label htmlFor="keywords" className="block text-gray-700">Keywords:</label>
           <input
             type="text"
@@ -183,7 +184,7 @@ const JobPositionRegister: React.FC = () => {
             }
             className="mt-1 p-2 border border-gray-300 rounded w-full"
           />
-        </div> */}
+        </div>
         <button
           type="submit"
           className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"

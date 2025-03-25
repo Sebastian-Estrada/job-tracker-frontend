@@ -19,11 +19,12 @@ const UsersList: React.FC = () => {
     first_name: '',
     last_name: '',
   });
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch('http://localhost:8000/users/', {
+        const response = await fetch(`${backendUrl}/users/`, {
           headers: {
             'Authorization': `Token ${localStorage.getItem('token')}`,
           },

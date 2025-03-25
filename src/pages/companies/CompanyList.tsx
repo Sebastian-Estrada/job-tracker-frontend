@@ -11,10 +11,12 @@ const CompanyList: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   useEffect(() => {
     const fetchCompanies = async () => {
       try {
-        const response = await fetch('http://localhost:8000/applications/companies/', {
+        const response = await fetch(`${backendUrl}/applications/companies/`, {
           headers: {
             'Authorization': `Token ${localStorage.getItem('token')}`,
           },

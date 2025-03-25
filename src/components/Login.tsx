@@ -9,11 +9,12 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
-      const response = await fetch('http://localhost:8000/users/login/', {
+      const response = await fetch(`${backendUrl}/users/login/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -36,7 +37,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
 
   return (
     <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-lg mx-auto mt-20">
-      <h2 className="text-2xl font-bold mb-6 text-gray-800">Login Job Tracker</h2>
+      <h2 className="text-2xl font-bold mb-6 text-gray-800">Login Job Tracker Test</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label htmlFor="username" className="block text-sm font-medium text-gray-700">Username</label>

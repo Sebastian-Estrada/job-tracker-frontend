@@ -1,0 +1,29 @@
+# Frontend values.yaml
+serviceAccount:
+  create: true
+  name: frontend-sa
+
+image:
+  repository: sebasnates/job-tracker-frontend   # Docker image for the frontend
+  tag: latest                                   # Use the latest tag
+  pullPolicy: Always                      # Avoid pulling the image if it's already present
+
+replicaCount: 2                                 # Number of frontend replicas
+
+service:
+  type: LoadBalancer                                 # Expose the frontend service via NodePort
+  port: 80                                     # Kubernetes service port
+  targetPort: 80                                 # Container port inside the pod (where the frontend listens)
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-type: "alb"  # Specify ALB
+
+ingress:
+  enabled: false  # Set to false if you don't need ingress
+
+autoscaling:
+  enabled: false  # Set to true if you want HPA
+  minReplicas: 1
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 80
+                           # Container port inside the pod (where the backend listens)
+                                # Limit the CPU usage to 500 milli-CPU

@@ -33,17 +33,14 @@ jobs:
       - name: Build and Push Docker Image
         run: |
           IMAGE_URI="${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:latest"
-          docker build -t $IMAGE_URI -f Docker/Dockerfile .
+          docker build --build-arg VITE_BACKEND_URL=${{ vars.VITE_BACKEND_URL }} -t $IMAGE_URI -f Docker/Dockerfile .
           docker push $IMAGE_URI
 
       - name: Update Kubeconfig for EKS
         run: |
           aws eks update-kubeconfig --region $AWS_REGION --name $CLUSTER_NAME
 
-      - name: Set Environment Variables in Kubernetes
+      - name: Set Rollout in Kubernetes
         run: |
-          kubectl set env deployment/frontend \
-            VITE_BACKEND_URL=${{ vars.VITE_BACKEND_URL }} -n $NAMESPACE
-
           kubectl rollout restart deployment/frontend -n $NAMESPACE
           kubectl rollout status deployment/frontend -n $NAMESPACE

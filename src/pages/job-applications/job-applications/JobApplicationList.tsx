@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 interface JobApplication {
   id: number;
   job_position: string;
-  company: string;
   status: string;
   // Add other fields as necessary
 }
@@ -48,7 +47,6 @@ const JobApplicationList: React.FC = () => {
           <tr className="bg-gray-200 text-gray-700">
             <th className="p-4 border-b text-left">ID</th>
             <th className="p-4 border-b text-left">Job Position</th>
-            <th className="p-4 border-b text-left">Company</th>
             <th className="p-4 border-b text-left">Status</th>
           </tr>
         </thead>
@@ -58,7 +56,6 @@ const JobApplicationList: React.FC = () => {
               <tr key={application.id} className="hover:bg-gray-100">
                 <td className="p-4 border-b text-left">{application.id}</td>
                 <td className="p-4 border-b text-left">{application.job_position}</td>
-                <td className="p-4 border-b text-left">{application.company}</td>
                 <td className="p-4 border-b text-left">{application.status}</td>
               </tr>
             ))

@@ -12,11 +12,12 @@ const ApplicationStatusList: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
     const fetchStatuses = async () => {
       try {
-        const response = await fetch('http://localhost:8000/applications/application-statuses/', {
+        const response = await fetch(`${backendUrl}/applications/application-statuses/`, {
           headers: {
             'Authorization': `Token ${localStorage.getItem('token')}`,
           },

@@ -6,7 +6,7 @@ WORKDIR /app
 
 # Install dependencies
 COPY package*.json ./
-RUN npm install --silent
+RUN npm install
 
 # Declare the build argument
 ARG VITE_BACKEND_URL

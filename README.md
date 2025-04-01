@@ -121,7 +121,9 @@ To build, tag, and push the Docker image for the frontend application to Amazon 
   docker push 732978450718.dkr.ecr.ca-central-1.amazonaws.com/frontend:latest
   ```
 
-docker build -f Docker/Dockerfile -t frontend .
+docker build -f Docker/Dockerfile -t job-tracker-frontend .
+docker tag job-tracker-frontend:latest sebasnates/job-tracker-frontend:latest
+docker push sebasnates/job-tracker-frontend:latest
 docker tag frontend:latest 732978450718.dkr.ecr.ca-central-1.amazonaws.com/frontend:latest
 aws ecr get-login-password --region ca-central-1 --profile personal-account | docker login --username AWS --password-stdin 732978450718.dkr.ecr.ca-central-1.amazonaws.com
 docker push 732978450718.dkr.ecr.ca-central-1.amazonaws.com/frontend:latest

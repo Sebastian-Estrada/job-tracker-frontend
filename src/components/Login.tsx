@@ -37,7 +37,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
 
   return (
     <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-lg mx-auto mt-20">
-      <h2 className="text-2xl font-bold mb-6 text-gray-800">Login Job Tracker</h2>
+      <h2 className="text-2xl font-bold mb-6 text-gray-800">Login Job Tracker Test</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label htmlFor="username" className="block text-sm font-medium text-gray-700">Username</label>

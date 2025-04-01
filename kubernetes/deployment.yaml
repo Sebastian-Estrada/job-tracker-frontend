@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+spec:
+  selector:
+    matchLabels:
+      version: v1           # Pod label to be used by Service to select the pods from this deployment
+  replicas: 3                # number of replica of the Pods
+  template:
+    metadata:
+      labels:
+        env: dev         # Pod's label
+        app: frontend
+        version: v1
+    spec:
+      containers:
+      - name: frontend-container
+        image: sebasnates/job-tracker-frontend      # which image it will use
+        # command: ["/bin/sh", "-c", "sleep 3600"]
+        ports:
+        - containerPort: 80    # Port exposed by container inside the Pod
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+  labels:
+    version: v1       # label of the service
+spec:
+  type: NodePort
+  ports:
+  - port: 8000            # the port on which the service is listening
+    protocol: TCP
+    targetPort: 80      # the port exposed by Pod (we defined in the deployment as part of `containerPort)
+  selector:
+    version: v1       # Pod label that service is using to select Pods

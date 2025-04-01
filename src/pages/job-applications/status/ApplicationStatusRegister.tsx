@@ -5,10 +5,11 @@ const ApplicationStatusRegister: React.FC = () => {
   const [status, setStatus] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   const handleRegister = async () => {
     try {
-      const response = await fetch('http://localhost:8000/applications/application-statuses/', {
+      const response = await fetch(`${backendUrl}/applications/application-statuses/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
